@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_spotlight">
+
+    <fragment
+        android:id="@+id/navigation_spotlight"
+        android:name="de.mt.shop.ui.spotlight.SpotlightFragment"
+        android:label="Spotlight"
+        tools:layout="@layout/fragment_spotlight" />
+
+    <fragment
+        android:id="@+id/navigation_categories"
+        android:name="de.mt.shop.ui.categories.CategoriesFragment"
+        android:label="Kategorien"
+        tools:layout="@layout/fragment_categories" />
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="de.mt.shop.ui.cart.CartFragment"
+        android:label="Warenkorb"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="de.mt.shop.ui.map.MapFragment"
+        android:label="Umgebung"
+        tools:layout="@layout/fragment_map" />
+</navigation>
