@@ -1,31 +1,44 @@
 package de.mt.shop.ui.categories;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.mt.shop.databinding.FragmentCategoriesBinding;
+import de.mt.shop.services.CategoriesAsyncTask;
 
 public class CategoriesFragment extends Fragment {
 
     private FragmentCategoriesBinding binding;
+    LayoutInflater inflater;
+    private List<String> entries;
+    private ArrayAdapter<String> adapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CategoriesViewModel categoriesViewModel =
-                new ViewModelProvider(this).get(CategoriesViewModel.class);
-
+        this.inflater = inflater;
         binding = FragmentCategoriesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        categoriesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        entries = new ArrayList<>();
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, entries);
+        ListView list = binding.categoriesList;
+        list.setAdapter(adapter);
+
+        new CategoriesAsyncTask(adapter, entries).execute();
+
         return root;
     }
 

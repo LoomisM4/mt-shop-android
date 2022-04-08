@@ -4,5 +4,13 @@ import lombok.Data;
 
 @Data
 public class Response {
-    private Embedded embedded;
+    public Embedded getEmbedded() {
+        return _embedded;
+    }
+
+    public void setEmbedded(Embedded embedded) {
+        this._embedded = embedded;
+    }
+
+    private Embedded _embedded;
 }
