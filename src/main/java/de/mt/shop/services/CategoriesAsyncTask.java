@@ -14,10 +14,10 @@ import de.mt.shop.objects.Link;
 
 public class CategoriesAsyncTask extends AsyncTask<Link, Integer, List<Category>> {
     private ArrayAdapter<String> adapter;
-    private List<String> entries;
+    private List<Category> entries;
     private Consumer<Link> onCategorySelected;
 
-    public CategoriesAsyncTask(ArrayAdapter<String> adapter, List<String> entries) {
+    public CategoriesAsyncTask(ArrayAdapter<String> adapter, List<Category> entries) {
         this.adapter = adapter;
         this.entries = entries;
         //this.onCategorySelected = onCategorySelected;
@@ -38,7 +38,7 @@ public class CategoriesAsyncTask extends AsyncTask<Link, Integer, List<Category>
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onPostExecute(List<Category> categories) {
-        categories.stream().map(c -> c.getName()).forEach(entries::add);
+        entries.addAll(categories);
         adapter.notifyDataSetChanged();
     }
 }

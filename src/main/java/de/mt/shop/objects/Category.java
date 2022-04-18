@@ -31,4 +31,9 @@ public class Category {
     public void setLinks(Links links) {
         this._links = links;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
