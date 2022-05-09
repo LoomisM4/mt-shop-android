@@ -5,26 +5,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.mt.shop.R;
 import de.mt.shop.databinding.FragmentSpotlightBinding;
-import de.mt.shop.objects.SpotlightArticle;
+import de.mt.shop.objects.ImageArticle;
 import de.mt.shop.services.SpotlightAsyncTask;
-import de.mt.shop.ui.BitmapArrayAdapter;
+import de.mt.shop.ui.adapters.BitmapArrayAdapter;
 
 public class SpotlightFragment extends Fragment {
 
     private FragmentSpotlightBinding binding;
-    private List<SpotlightArticle> spotlightArticles;
+    private List<ImageArticle> imageArticles;
     LayoutInflater inflater;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -35,14 +35,14 @@ public class SpotlightFragment extends Fragment {
         binding = FragmentSpotlightBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        spotlightArticles = new ArrayList<>();
+        imageArticles = new ArrayList<>();
         ListView spotlightList = binding.spotlightList;
         BitmapArrayAdapter adapter =
-                new BitmapArrayAdapter(getContext(), R.layout.spotlight_image, spotlightArticles);
+                new BitmapArrayAdapter(getContext(), R.layout.spotlight_image, imageArticles);
         adapter.setOnItemClick(this::onItemClicked);
         spotlightList.setAdapter(adapter);
 
-        new SpotlightAsyncTask(spotlightArticles, adapter).execute();
+        new SpotlightAsyncTask(imageArticles, adapter).execute();
 
         return root;
     }
@@ -53,7 +53,13 @@ public class SpotlightFragment extends Fragment {
         binding = null;
     }
 
-    private void onItemClicked(SpotlightArticle spotlightArticle) {
-        //
+    private void onItemClicked(ImageArticle imageArticle) {
+        if (imageArticle.getArticle().getLinks().getDetails() != null) {
+            Bundle args = new Bundle();
+            args.putString("url", imageArticle.getArticle().getLinks().getDetails().getHref());
+            args.putString("title", "TODO");
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_navigation_spotlight_to_detailsFragement, args);
+        }
     }
 }

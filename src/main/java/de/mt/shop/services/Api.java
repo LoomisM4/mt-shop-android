@@ -8,19 +8,16 @@ import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import de.mt.shop.objects.Article;
 import de.mt.shop.objects.Category;
-import de.mt.shop.objects.Details;
 import de.mt.shop.objects.Link;
 import de.mt.shop.objects.Response;
 
@@ -34,8 +31,8 @@ class Api {
                 .orElse(new ArrayList<>());
     }
 
-    public static Details details(Link link) {
-        Optional<Details> details = webOrCache(link.getHref(), Details.class);
+    public static Article details(Link link) {
+        Optional<Article> details = webOrCache(link.getHref(), Article.class);
         return details.orElse(null);
     }
 
@@ -48,6 +45,12 @@ class Api {
 
         Optional<Response> response = webOrCache(l.getHref(), Response.class);
         return response.map(r -> r.getEmbedded().getCategories())
+                .orElse(new ArrayList<>());
+    }
+
+    public static List<Article> articles(Link link) {
+        Optional<Response> response = webOrCache(link.getHref(), Response.class);
+        return response.map(r -> r.getEmbedded().getArticles())
                 .orElse(new ArrayList<>());
     }
 
@@ -67,6 +70,7 @@ class Api {
 
     private static <T> Optional<T> webOrCache(String uri, Class<T> responseClass) {
         try {
+            uri = uri.replaceFirst("http://", "https://"); // TODO sollte wieder weg
             URL url = new URL(uri);
             InputStreamReader reader = new InputStreamReader(url.openStream());
             T t = new Gson().fromJson(reader, responseClass);

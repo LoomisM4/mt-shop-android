@@ -9,13 +9,24 @@
         android:id="@+id/navigation_spotlight"
         android:name="de.mt.shop.ui.spotlight.SpotlightFragment"
         android:label="Spotlight"
-        tools:layout="@layout/fragment_spotlight" />
+        tools:layout="@layout/fragment_spotlight" >
+        <action
+            android:id="@+id/action_navigation_spotlight_to_detailsFragement"
+            app:destination="@id/detailsFragement" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_categories"
         android:name="de.mt.shop.ui.categories.CategoriesFragment"
         android:label="Kategorien"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_navigation_categories_self"
+            app:destination="@id/navigation_categories" />
+        <action
+            android:id="@+id/action_navigation_categories_to_articleListFragment"
+            app:destination="@id/articleListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_cart"
@@ -28,4 +39,18 @@
         android:name="de.mt.shop.ui.map.MapFragment"
         android:label="Umgebung"
         tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/detailsFragement"
+        android:name="de.mt.shop.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/articleListFragment"
+        android:name="de.mt.shop.ui.articlelist.ArticleListFragment"
+        android:label="fragment_articlelist"
+        tools:layout="@layout/fragment_articlelist" >
+        <action
+            android:id="@+id/action_articleListFragment_to_detailsFragement"
+            app:destination="@id/detailsFragement" />
+    </fragment>
 </navigation>

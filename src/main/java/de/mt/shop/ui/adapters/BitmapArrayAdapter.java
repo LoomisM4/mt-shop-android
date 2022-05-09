@@ -1,4 +1,4 @@
-package de.mt.shop.ui;
+package de.mt.shop.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,23 +15,22 @@ import androidx.annotation.RequiresApi;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 import de.mt.shop.R;
-import de.mt.shop.objects.SpotlightArticle;
+import de.mt.shop.objects.ImageArticle;
 
-public class BitmapArrayAdapter extends ArrayAdapter<SpotlightArticle> {
-    private List<SpotlightArticle> articles;
-    private Consumer<SpotlightArticle> onItemClick;
+public class BitmapArrayAdapter extends ArrayAdapter<ImageArticle> {
+    private List<ImageArticle> articles;
+    private Consumer<ImageArticle> onItemClick;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public BitmapArrayAdapter(@NonNull Context context, int resource, @NonNull List<SpotlightArticle> objects) {
+    public BitmapArrayAdapter(@NonNull Context context, int resource, @NonNull List<ImageArticle> objects) {
         super(context, resource, objects);
         this.articles = objects;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void setOnItemClick(Consumer<SpotlightArticle> onItemClick) {
+    public void setOnItemClick(Consumer<ImageArticle> onItemClick) {
         this.onItemClick = onItemClick;
     }
 

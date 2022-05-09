@@ -5,17 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.mt.shop.CategoriesArrayAdapter;
+import de.mt.shop.R;
+import de.mt.shop.objects.Link;
+import de.mt.shop.ui.adapters.CategoriesArrayAdapter;
 import de.mt.shop.databinding.FragmentCategoriesBinding;
 import de.mt.shop.objects.Category;
 import de.mt.shop.services.CategoriesAsyncTask;
@@ -40,7 +42,17 @@ public class CategoriesFragment extends Fragment {
         ListView list = binding.categoriesList;
         list.setAdapter(adapter);
 
-        new CategoriesAsyncTask(adapter, entries).execute();
+        Bundle args = getArguments();
+        Link link = null;
+        if (args != null) {
+            String url = args.getString("url");
+            if (url != null) {
+                link = new Link();
+                link.setHref(url);
+            }
+        }
+
+        new CategoriesAsyncTask(adapter, entries).execute(link);
 
         return root;
     }
@@ -52,6 +64,15 @@ public class CategoriesFragment extends Fragment {
     }
 
     public void onItemTapped(Category c) {
-
+        Bundle args = new Bundle();
+        if (c.getLinks().getSubcategories() != null) {
+            args.putString("url", c.getLinks().getSubcategories().getHref());
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_navigation_categories_self, args);
+        } else if (c.getLinks().getArticles() != null) {
+            args.putString("url", c.getLinks().getArticles().getHref());
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_navigation_categories_to_articleListFragment, args);
+        }
     }
 }

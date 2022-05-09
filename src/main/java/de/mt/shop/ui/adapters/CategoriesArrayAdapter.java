@@ -1,4 +1,4 @@
-package de.mt.shop;
+package de.mt.shop.ui.adapters;
 
 import android.content.Context;
 import android.os.Build;
