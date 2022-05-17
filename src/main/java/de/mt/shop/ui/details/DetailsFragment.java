@@ -60,6 +60,8 @@ public class DetailsFragment extends Fragment {
     }
 
     private void onSuccess(Article article) {
+        if (article == null) return;
+
         article.getLinks().getImages().forEach(i -> {
             new ImageAsyncTask(this::onImageLoaded).execute(i);
         });
