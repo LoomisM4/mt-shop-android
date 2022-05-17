@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.spotlight.SpotlightFragment"
+    android:id="@+id/spotlight_list"
+    style="@android:style/Widget.DeviceDefault.ExpandableListView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.spotlight.SpotlightFragment">
-
-    <ListView
-        android:id="@+id/spotlight_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+</ListView>

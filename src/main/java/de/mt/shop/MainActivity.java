@@ -1,9 +1,11 @@
 package de.mt.shop;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -34,4 +36,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

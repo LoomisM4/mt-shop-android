@@ -4,13 +4,17 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.Optional;
 
@@ -22,22 +26,12 @@ import de.mt.shop.services.ImageAsyncTask;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class DetailsFragment extends Fragment {
-    private String url;
-    private String title;
     private FragmentDetailsBinding binding;
     private LayoutInflater inflater;
     private Article article;
 
     public DetailsFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        this.url = args.getString("url");
-        this.title = args.getString("title");
     }
 
     @Override
@@ -48,7 +42,13 @@ public class DetailsFragment extends Fragment {
         View view = binding.getRoot();
         binding.addToCartButton.setOnClickListener(this::onAddToCartClicked);
 
-        new DetailsAsyncTask(this::onSuccess).execute(url);
+        Bundle args = getArguments();
+        if (args != null) {
+            String url = args.getString("url");
+            String title = args.getString("title");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+            new DetailsAsyncTask(this::onSuccess).execute(url);
+        }
 
         return view;
     }

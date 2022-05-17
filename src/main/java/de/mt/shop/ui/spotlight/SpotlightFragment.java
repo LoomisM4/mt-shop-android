@@ -57,7 +57,6 @@ public class SpotlightFragment extends Fragment {
         if (imageArticle.getArticle().getLinks().getDetails() != null) {
             Bundle args = new Bundle();
             args.putString("url", imageArticle.getArticle().getLinks().getDetails().getHref());
-            args.putString("title", "TODO");
             NavHostFragment.findNavController(this)
                     .navigate(R.id.action_navigation_spotlight_to_detailsFragement, args);
         }

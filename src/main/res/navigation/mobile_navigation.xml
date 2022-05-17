@@ -42,13 +42,12 @@
     <fragment
         android:id="@+id/detailsFragement"
         android:name="de.mt.shop.ui.details.DetailsFragment"
-        android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
     <fragment
         android:id="@+id/articleListFragment"
         android:name="de.mt.shop.ui.articlelist.ArticleListFragment"
-        android:label="fragment_articlelist"
-        tools:layout="@layout/fragment_articlelist" >
+        android:label=" "
+        tools:layout="@layout/fragment_articlelist">
         <action
             android:id="@+id/action_articleListFragment_to_detailsFragement"
             app:destination="@id/detailsFragement" />

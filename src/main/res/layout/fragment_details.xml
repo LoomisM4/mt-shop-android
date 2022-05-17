@@ -1,43 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:isScrollContainer="true"
     android:nestedScrollingEnabled="true"
     android:orientation="vertical"
     android:overScrollMode="always"
-    tools:context=".ui.details.DetailsFragment">
+    tools:context=".ui.details.DetailsFragment"
+    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck">
 
     <LinearLayout
-        android:id="@+id/imagesLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:isScrollContainer="true"
-        android:nestedScrollingEnabled="true"
-        android:orientation="horizontal"
-        android:overScrollMode="always">
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="true"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:id="@+id/imagesLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isScrollContainer="true"
+                android:nestedScrollingEnabled="true"
+                android:orientation="horizontal"
+                android:overScrollMode="always"
+                android:scrollbars="horizontal">
+
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:gravity="center_horizontal"
+            android:text=" "
+            android:textSize="20sp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/descriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text=" "
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/addToCartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="72dp"
+            android:text="In den Warenkorb" />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/descriptionText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/addToCartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="In den Warenkorb" />
-
-</FrameLayout>
+</ScrollView>

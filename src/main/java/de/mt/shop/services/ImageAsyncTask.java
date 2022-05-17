@@ -3,7 +3,9 @@ package de.mt.shop.services;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.view.Window;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.RequiresApi;
 
 import java.util.Optional;

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -22,22 +23,12 @@ import de.mt.shop.ui.adapters.BitmapArrayAdapter;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class ArticleListFragment extends Fragment {
-    private String url;
-    private String title;
     private FragmentArticlelistBinding binding;
     private List<ImageArticle> articles;
     private BitmapArrayAdapter adapter;
 
     public ArticleListFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle args = getArguments();
-        this.url = args.getString("url");
-        this.title = args.getString("title");
     }
 
     @Override
@@ -51,7 +42,13 @@ public class ArticleListFragment extends Fragment {
         adapter.setOnItemClick(this::onArticleClicked);
         binding.articleGrid.setAdapter(adapter);
 
-        new ArticleListAsyncTask(this::onArticlesLoaded).execute(url);
+        Bundle args = getArguments();
+        if (args != null) {
+            String url = args.getString("url");
+            String title = args.getString("title");
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+            new ArticleListAsyncTask(this::onArticlesLoaded).execute(url);
+        }
 
         return view;
     }
@@ -65,7 +62,7 @@ public class ArticleListFragment extends Fragment {
         if (imageArticle.getArticle().getLinks().getDetails() != null) {
             Bundle args = new Bundle();
             args.putString("url", imageArticle.getArticle().getLinks().getDetails().getHref());
-            args.putString("title", "TODO");
+            args.putString("title", imageArticle.getArticle().getName());
             NavHostFragment.findNavController(this)
                     .navigate(R.id.action_articleListFragment_to_detailsFragement, args);
         }

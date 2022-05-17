@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -50,6 +51,10 @@ public class CategoriesFragment extends Fragment {
                 link = new Link();
                 link.setHref(url);
             }
+            String title = args.getString("title");
+            if (title != null) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+            }
         }
 
         new CategoriesAsyncTask(adapter, entries).execute(link);
@@ -65,6 +70,7 @@ public class CategoriesFragment extends Fragment {
 
     public void onItemTapped(Category c) {
         Bundle args = new Bundle();
+        args.putString("title", c.getName());
         if (c.getLinks().getSubcategories() != null) {
             args.putString("url", c.getLinks().getSubcategories().getHref());
             NavHostFragment.findNavController(this)
