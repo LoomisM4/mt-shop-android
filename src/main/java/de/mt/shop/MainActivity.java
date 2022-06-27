@@ -24,13 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.N) // 4
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Api.init(getPreferences(Context.MODE_PRIVATE),
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE));
+        Api.init(getPreferences(Context.MODE_PRIVATE), // 3
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE)); // 3
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -46,13 +46,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+    @Override // 1
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) { // 1
+        switch (item.getItemId()) { // 2
+            case android.R.id.home: // 4
+                onBackPressed(); // 1
+                return true; // 1
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item); // 2
     }
 }
+
+// 22

@@ -7,36 +7,36 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.RequiresApi;
 
 import java.util.List;
-import java.util.function.Consumer;
 
-import de.mt.shop.objects.Category;
-import de.mt.shop.objects.Link;
+import de.mt.shop.objects.gen.Category;
+import de.mt.shop.objects.gen.Link;
 
-public class CategoriesAsyncTask extends AsyncTask<Link, Integer, List<Category>> {
-    private ArrayAdapter<String> adapter;
-    private List<Category> entries;
+@RequiresApi(api = Build.VERSION_CODES.N) // 4
+public class CategoriesAsyncTask extends AsyncTask<Link, Integer, List<Category>> { // 1
+    private ArrayAdapter<String> adapter; // 0
+    private List<Category> entries; // 0
 
-    public CategoriesAsyncTask(ArrayAdapter<String> adapter, List<Category> entries) {
-        this.adapter = adapter;
-        this.entries = entries;
+    public CategoriesAsyncTask(ArrayAdapter<String> adapter, List<Category> entries) { // 1
+        this.adapter = adapter; // 2
+        this.entries = entries; // 2
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
-    protected List<Category> doInBackground(Link... links) {
-        Link l;
-        if (links == null || links.length == 0) {
-            l = null;
-        } else {
-            l = links[0];
+    @Override // 1
+    protected List<Category> doInBackground(Link... links) { // 1
+        Link l; // 0
+        if (links == null || links.length == 0) { // 5
+            l = null; // 1
+        } else { // 1
+            l = links[0]; // 2
         }
-        return Api.categories(l);
+        return Api.categories(l); // 2
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
-    protected void onPostExecute(List<Category> categories) {
-        entries.addAll(categories);
-        adapter.notifyDataSetChanged();
+    @Override // 1
+    protected void onPostExecute(List<Category> categories) { // 1
+        entries.addAll(categories); // 1
+        adapter.notifyDataSetChanged(); // 1
     }
 }
+
+// 27

@@ -21,50 +21,52 @@ import de.mt.shop.objects.ImageArticle;
 import de.mt.shop.services.ArticleListAsyncTask;
 import de.mt.shop.ui.adapters.BitmapArrayAdapter;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
-public class ArticleListFragment extends Fragment {
-    private FragmentArticlelistBinding binding;
-    private List<ImageArticle> articles;
-    private BitmapArrayAdapter adapter;
+@RequiresApi(api = Build.VERSION_CODES.N) // 4
+public class ArticleListFragment extends Fragment { // 1
+    private FragmentArticlelistBinding binding; // 0
+    private List<ImageArticle> articles; // 0
+    private BitmapArrayAdapter adapter; // 0
 
-    public ArticleListFragment() {
+    public ArticleListFragment() { // 1
         // Required empty public constructor
     }
 
-    @Override
+    @Override // 1
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentArticlelistBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+                             Bundle savedInstanceState) { // 1
+        binding = FragmentArticlelistBinding.inflate(inflater, container, false); // 2
+        View view = binding.getRoot(); // 2
 
-        articles = new ArrayList<>();
-        adapter = new BitmapArrayAdapter(getContext(), R.layout.spotlight_image, articles);
-        adapter.setOnItemClick(this::onArticleClicked);
-        binding.articleGrid.setAdapter(adapter);
+        articles = new ArrayList<>(); // 2
+        adapter = new BitmapArrayAdapter(getContext(), R.layout.spotlight_image, articles); // 5
+        adapter.setOnItemClick(this::onArticleClicked); // 2
+        binding.articleGrid.setAdapter(adapter); // 2
 
-        Bundle args = getArguments();
-        if (args != null) {
-            String url = args.getString("url");
-            String title = args.getString("title");
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
-            new ArticleListAsyncTask(this::onArticlesLoaded).execute(url);
+        Bundle args = getArguments(); // 2
+        if (args != null) { // 2
+            String url = args.getString("url"); // 2
+            String title = args.getString("title"); // 2
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title); // 4
+            new ArticleListAsyncTask(this::onArticlesLoaded).execute(url); // 3
         }
 
-        return view;
+        return view; // 1
     }
 
-    private void onArticlesLoaded(List<ImageArticle> articles) {
-        this.articles.addAll(articles);
-        adapter.notifyDataSetChanged();
+    private void onArticlesLoaded(List<ImageArticle> articles) { // 1
+        this.articles.addAll(articles); // 2
+        adapter.notifyDataSetChanged(); // 1
     }
 
-    private void onArticleClicked(ImageArticle imageArticle) {
-        if (imageArticle.getArticle().getLinks().getDetails() != null) {
-            Bundle args = new Bundle();
-            args.putString("url", imageArticle.getArticle().getLinks().getDetails().getHref());
-            args.putString("title", imageArticle.getArticle().getName());
-            NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_articleListFragment_to_detailsFragement, args);
+    private void onArticleClicked(ImageArticle imageArticle) { // 1
+        if (imageArticle.getArticle().getLinks().getDetails() != null) { // 5
+            Bundle args = new Bundle(); // 2
+            args.putString("url", imageArticle.getArticle().getLinks().getDetails().getHref()); // 5
+            args.putString("title", imageArticle.getArticle().getName()); // 3
+            NavHostFragment.findNavController(this) // 1
+                    .navigate(R.id.action_articleListFragment_to_detailsFragement, args); // 3
         }
     }
 }
+
+// 63

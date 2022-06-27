@@ -17,68 +17,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.mt.shop.R;
-import de.mt.shop.objects.Link;
+import de.mt.shop.objects.gen.Link;
 import de.mt.shop.ui.adapters.CategoriesArrayAdapter;
 import de.mt.shop.databinding.FragmentCategoriesBinding;
-import de.mt.shop.objects.Category;
+import de.mt.shop.objects.gen.Category;
 import de.mt.shop.services.CategoriesAsyncTask;
 
-public class CategoriesFragment extends Fragment {
+public class CategoriesFragment extends Fragment { // 1
 
-    private FragmentCategoriesBinding binding;
-    LayoutInflater inflater;
-    private List<Category> entries;
-    private CategoriesArrayAdapter adapter;
+    private FragmentCategoriesBinding binding; // 0
+    LayoutInflater inflater; // 0
+    private List<Category> entries; // 0
+    private CategoriesArrayAdapter adapter; // 0
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.N) // 4
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        this.inflater = inflater;
-        binding = FragmentCategoriesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+                             ViewGroup container, Bundle savedInstanceState) { // 1
+        this.inflater = inflater; // 2
+        binding = FragmentCategoriesBinding.inflate(inflater, container, false); // 2
+        View root = binding.getRoot(); // 2
 
-        entries = new ArrayList<>();
-        adapter = new CategoriesArrayAdapter(getContext(), android.R.layout.simple_list_item_1, entries);
-        adapter.setOnItemTapped(this::onItemTapped);
-        ListView list = binding.categoriesList;
-        list.setAdapter(adapter);
+        entries = new ArrayList<>(); // 2
+        adapter = new CategoriesArrayAdapter(getContext(), android.R.layout.simple_list_item_1, entries); // 6
+        adapter.setOnItemTapped(this::onItemTapped); // 2
+        ListView list = binding.categoriesList; // 2
+        list.setAdapter(adapter); // 1
 
-        Bundle args = getArguments();
-        Link link = null;
-        if (args != null) {
-            String url = args.getString("url");
-            if (url != null) {
-                link = new Link();
-                link.setHref(url);
+        Bundle args = getArguments(); // 2
+        Link link = null; // 1
+        if (args != null) { // 2
+            String url = args.getString("url"); // 2
+            if (url != null) { // 2
+                link = new Link(); // 2
+                link.setHref(url); // 1
             }
-            String title = args.getString("title");
-            if (title != null) {
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
+            String title = args.getString("title"); // 2
+            if (title != null) { // 2
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title); // 4
             }
         }
 
-        new CategoriesAsyncTask(adapter, entries).execute(link);
+        new CategoriesAsyncTask(adapter, entries).execute(link); // 2
 
-        return root;
+        return root; // 1
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    @Override // 1
+    public void onDestroyView() { // 1
+        super.onDestroyView(); // 1
+        binding = null; // 1
     }
 
-    public void onItemTapped(Category c) {
-        Bundle args = new Bundle();
-        args.putString("title", c.getName());
-        if (c.getLinks().getSubcategories() != null) {
-            args.putString("url", c.getLinks().getSubcategories().getHref());
-            NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_navigation_categories_self, args);
-        } else if (c.getLinks().getArticles() != null) {
-            args.putString("url", c.getLinks().getArticles().getHref());
-            NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_navigation_categories_to_articleListFragment, args);
+    public void onItemTapped(Category c) { // 1
+        Bundle args = new Bundle(); // 2
+        args.putString("title", c.getName()); // 2
+        if (c.getLinks().getSubcategories() != null) { // 4
+            args.putString("url", c.getLinks().getSubcategories().getHref()); // 4
+            NavHostFragment.findNavController(this) // 1
+                    .navigate(R.id.action_navigation_categories_self, args); // 3
+        } else if (c.getLinks().getArticles() != null) { // 4
+            args.putString("url", c.getLinks().getArticles().getHref()); // 4
+            NavHostFragment.findNavController(this) // 1
+                    .navigate(R.id.action_navigation_categories_to_articleListFragment, args); // 3
         }
     }
 }
+
+// 81

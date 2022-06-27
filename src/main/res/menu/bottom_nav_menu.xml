@@ -4,21 +4,23 @@
     <item
         android:id="@+id/navigation_spotlight"
         android:icon="@drawable/ic_baseline_star_24"
-        android:title="Spotlight" />
+        android:title="Spotlight" /> <!-- 4 -->
 
     <item
         android:id="@+id/navigation_categories"
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
-        android:title="Kategorien" />
+        android:title="Kategorien" /> <!-- 4 -->
 
     <item
         android:id="@+id/navigation_cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
-        android:title="Warenkorb" />
+        android:title="Warenkorb" /> <!-- 4 -->
 
     <item
         android:id="@+id/navigation_map"
         android:icon="@drawable/ic_baseline_map_24"
-        android:title="Umgebung" />
+        android:title="Umgebung" /> <!-- 4 -->
 
 </menu>
+
+<!-- 16 -->

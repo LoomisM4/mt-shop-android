@@ -1,4 +1,4 @@
-package de.mt.shop.objects;
+package de.mt.shop.objects.gen;
 
 import java.util.List;
 

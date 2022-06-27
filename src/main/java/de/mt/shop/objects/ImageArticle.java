@@ -2,20 +2,24 @@ package de.mt.shop.objects;
 
 import android.graphics.Bitmap;
 
-public class ImageArticle {
-    private Bitmap img;
-    private Article article;
+import de.mt.shop.objects.gen.Article;
 
-    public ImageArticle(Article article, Bitmap bitmap) {
-        this.article = article;
-        this.img = bitmap;
+public class ImageArticle { // 1
+    private Bitmap img; // 0
+    private Article article; // 0
+
+    public ImageArticle(Article article, Bitmap bitmap) { // 1
+        this.article = article; // 2
+        this.img = bitmap; // 2
     }
 
-    public Bitmap getImg() {
-        return img;
+    public Bitmap getImg() { // 1
+        return img; // 1
     }
 
-    public Article getArticle() {
-        return article;
+    public Article getArticle() { // 1
+        return article; // 1
     }
 }
+
+// 10

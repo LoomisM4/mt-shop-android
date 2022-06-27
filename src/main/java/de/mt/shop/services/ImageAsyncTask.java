@@ -3,32 +3,31 @@ package de.mt.shop.services;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.view.Window;
 
-import androidx.annotation.Dimension;
 import androidx.annotation.RequiresApi;
 
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import de.mt.shop.objects.Link;
+import de.mt.shop.objects.gen.Link;
 
-public class ImageAsyncTask extends AsyncTask<Link, Integer, Bitmap> {
-    private Consumer<Bitmap> onImageLoaded;
+@RequiresApi(api = Build.VERSION_CODES.N) // 4
+public class ImageAsyncTask extends AsyncTask<Link, Integer, Bitmap> { // 1
+    private Consumer<Bitmap> onImageLoaded; // 0
 
-    public ImageAsyncTask(Consumer<Bitmap> onImageLoaded) {
-        this.onImageLoaded = onImageLoaded;
+    public ImageAsyncTask(Consumer<Bitmap> onImageLoaded) { // 1
+        this.onImageLoaded = onImageLoaded; // 2
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
-    protected Bitmap doInBackground(Link... links) {
-        return Api.image(links[0]);
+    @Override // 1
+    protected Bitmap doInBackground(Link... links) { // 1
+        return Api.image(links[0]); // 3
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
-    protected void onPostExecute(Bitmap bitmap) {
-        Optional.ofNullable(onImageLoaded).ifPresent(c -> c.accept(bitmap));
+    @Override // 1
+    protected void onPostExecute(Bitmap bitmap) { // 1
+        Optional.ofNullable(onImageLoaded).ifPresent(c -> c.accept(bitmap)); // 3
     }
 }
+
+// 18

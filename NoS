@@ -1,0 +1,46 @@
+mt-shop-android                                                 1191
+    java/
+        objects/                                        91
+            gen/                                6
+            Cart.java                           75
+            ImageArticle.java                   10
+        services/                                       265
+            Api.java                            137
+            ArticleListAsyncTask.java           32
+            CategoriesAsyncTask.java            27
+            DetailsAsyncTask.java               21
+            ImageAsyncTask.java                 18
+            SpotlightAsyncTask.java             30
+        ui/
+            adapters/                                   146
+                BitmapArrayAdapter.java         42
+                CartArrayAdapter.java           81
+                CategoriesArrayAdapter.java     23
+            articlelist/                                63
+                ArticleListFragment.java        63
+            cart/                                       65
+                CartFragment.java               65
+            categories/                                 81
+                CategoriesFragment.java         81
+            details/                                    61
+                DetailsFragment.java            61
+            map/                                        112
+                MapFragment.java                112
+            spotlight/                                  48
+                SpotlightFragment.java          48
+        MainActivity.java                               22
+    res/
+        layout/                                         168
+            cart_article_layout.xml             48
+            fragment_articlelist.xml            5
+            fragment_cart.xml                   38
+            fragment_categories.xml             9
+            fragment_details.xml                47
+            fragment_map.xml                    10
+            fragment_spotlight.xml              6
+            spotlight_image.xml                 5
+        menu/                                           16
+            bottom_nav_menu.xml                 16
+        navigation/                                     42
+            mobile_navigation.xml               42
+    AndroidManifest.xml                                 11

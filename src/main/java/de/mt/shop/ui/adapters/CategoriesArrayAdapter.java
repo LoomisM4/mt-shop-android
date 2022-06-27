@@ -13,31 +13,33 @@ import androidx.annotation.RequiresApi;
 import java.util.List;
 import java.util.function.Consumer;
 
-import de.mt.shop.objects.Category;
+import de.mt.shop.objects.gen.Category;
 
-public class CategoriesArrayAdapter extends ArrayAdapter {
-    private List<Category> categories;
-    private Consumer<Category> onItemTapped;
+public class CategoriesArrayAdapter extends ArrayAdapter { // 1
+    private List<Category> categories; // 0
+    private Consumer<Category> onItemTapped; // 0
 
-    public CategoriesArrayAdapter(@NonNull Context context, int resource, List<Category> entries) {
-        super(context, resource, entries);
-        this.categories = entries;
+    public CategoriesArrayAdapter(@NonNull Context context, int resource, List<Category> entries) { // 1
+        super(context, resource, entries); // 1
+        this.categories = entries; // 2
     }
 
-    public void setOnItemTapped(Consumer<Category> onItemTapped) {
-        this.onItemTapped = onItemTapped;
+    public void setOnItemTapped(Consumer<Category> onItemTapped) { // 1
+        this.onItemTapped = onItemTapped; // 2
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view = super.getView(position, convertView, parent);
+    @RequiresApi(api = Build.VERSION_CODES.N) // 4
+    @NonNull // 1
+    @Override // 1
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) { // 1
+        View view = super.getView(position, convertView, parent); // 2
 
-        if (onItemTapped != null) {
-            view.setOnClickListener(v1 -> onItemTapped.accept(categories.get(position)));
+        if (onItemTapped != null) { // 2
+            view.setOnClickListener(v1 -> onItemTapped.accept(categories.get(position))); // 3
         }
 
-        return view;
+        return view; // 1
     }
 }
+
+// 23

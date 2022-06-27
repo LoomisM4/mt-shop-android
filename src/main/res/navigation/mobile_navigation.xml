@@ -3,53 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_spotlight">
+    app:startDestination="@+id/navigation_spotlight"> <!-- 1 -->
 
     <fragment
         android:id="@+id/navigation_spotlight"
         android:name="de.mt.shop.ui.spotlight.SpotlightFragment"
         android:label="Spotlight"
-        tools:layout="@layout/fragment_spotlight" >
+        tools:layout="@layout/fragment_spotlight" > <!-- 5 -->
         <action
             android:id="@+id/action_navigation_spotlight_to_detailsFragement"
-            app:destination="@id/detailsFragement" />
+            app:destination="@id/detailsFragement" /> <!-- 3 -->
     </fragment>
 
     <fragment
         android:id="@+id/navigation_categories"
         android:name="de.mt.shop.ui.categories.CategoriesFragment"
         android:label="Kategorien"
-        tools:layout="@layout/fragment_categories" >
+        tools:layout="@layout/fragment_categories" > <!-- 5 -->
         <action
             android:id="@+id/action_navigation_categories_self"
-            app:destination="@id/navigation_categories" />
+            app:destination="@id/navigation_categories" /> <!-- 3 -->
         <action
             android:id="@+id/action_navigation_categories_to_articleListFragment"
-            app:destination="@id/articleListFragment" />
+            app:destination="@id/articleListFragment" /> <!-- 3 -->
     </fragment>
 
     <fragment
         android:id="@+id/navigation_cart"
         android:name="de.mt.shop.ui.cart.CartFragment"
         android:label="Warenkorb"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" /> <!-- 5 -->
 
     <fragment
         android:id="@+id/navigation_map"
         android:name="de.mt.shop.ui.map.MapFragment"
         android:label="Umgebung"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" /> <!-- 5 -->
     <fragment
         android:id="@+id/detailsFragement"
         android:name="de.mt.shop.ui.details.DetailsFragment"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" /> <!-- 4 -->
     <fragment
         android:id="@+id/articleListFragment"
         android:name="de.mt.shop.ui.articlelist.ArticleListFragment"
         android:label=" "
-        tools:layout="@layout/fragment_articlelist">
+        tools:layout="@layout/fragment_articlelist"> <!-- 5 -->
         <action
             android:id="@+id/action_articleListFragment_to_detailsFragement"
-            app:destination="@id/detailsFragement" />
+            app:destination="@id/detailsFragement" /> <!-- 3 -->
     </fragment>
 </navigation>
+
+<!-- 42 -->

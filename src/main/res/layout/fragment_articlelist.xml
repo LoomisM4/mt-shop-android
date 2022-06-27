@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.articlelist.ArticleListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <GridView
         android:id="@+id/articleGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2" />
+        android:numColumns="2" /> <!-- 5 -->
 
 </FrameLayout>
+
+<!-- 5 -->

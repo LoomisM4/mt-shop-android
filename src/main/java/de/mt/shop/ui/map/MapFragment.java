@@ -29,121 +29,123 @@ import com.google.android.gms.tasks.Task;
 
 import de.mt.shop.databinding.FragmentMapBinding;
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, OnCompleteListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, OnCompleteListener { // 1
 
-    private FragmentMapBinding binding;
-    private MapView mapView;
-    private GoogleMap googleMap;
+    private FragmentMapBinding binding; // 0
+    private MapView mapView; // 0
+    private GoogleMap googleMap; // 0
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) { // 1
 
-        binding = FragmentMapBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        mapView = binding.mapView;
-        Bundle mapViewBundle = null;
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle("MapViewBundleKey");
+        binding = FragmentMapBinding.inflate(inflater, container, false); // 2
+        View root = binding.getRoot(); // 2
+        mapView = binding.mapView; // 2
+        Bundle mapViewBundle = null; // 1
+        if (savedInstanceState != null) { // 2
+            mapViewBundle = savedInstanceState.getBundle("MapViewBundleKey"); // 2
         }
-        mapView.onCreate(mapViewBundle);
-        mapView.getMapAsync(this);
+        mapView.onCreate(mapViewBundle); // 1
+        mapView.getMapAsync(this); // 1
 
-        return root;
+        return root; // 1
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    @Override // 1
+    public void onSaveInstanceState(Bundle outState) { // 1
+        super.onSaveInstanceState(outState); // 1
 
-        Bundle mapViewBundle = outState.getBundle("MapViewBundleKey");
-        if (mapViewBundle == null) {
-            mapViewBundle = new Bundle();
-            outState.putBundle("MapViewBundleKey", mapViewBundle);
-        }
-
-        mapView.onSaveInstanceState(mapViewBundle);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        mapView.onPause();
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        mapView.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (ActivityCompat.checkSelfPermission(this.getContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this.getContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this.getActivity(),
-                    new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-            ActivityCompat.requestPermissions(this.getActivity(),
-                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        Bundle mapViewBundle = outState.getBundle("MapViewBundleKey"); // 2
+        if (mapViewBundle == null) { // 2
+            mapViewBundle = new Bundle(); // 2
+            outState.putBundle("MapViewBundleKey", mapViewBundle); // 1
         }
 
-        FusedLocationProviderClient location = LocationServices.
-                getFusedLocationProviderClient(this.getContext());
-        location.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
-                .addOnCompleteListener(this);
+        mapView.onSaveInstanceState(mapViewBundle); // 1
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    @Override // 1
+    public void onResume() { // 1
+        super.onResume(); // 1
+        mapView.onResume(); // 1
     }
 
-    @SuppressLint("MissingPermission")
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        this.googleMap = googleMap;
-        googleMap.setMyLocationEnabled(true);
-        googleMap.setMinZoomPreference(16);
+    @Override // 1
+    public void onStart() { // 1
+        super.onStart(); // 1
+        mapView.onStart(); // 1
     }
 
-    @Override
-    public void onComplete(@NonNull Task task) {
-        Location loc = (Location) task.getResult();
-        double lng = loc.getLongitude();
-        double lat = loc.getLatitude();
+    @Override // 1
+    public void onStop() { // 1
+        super.onStop(); // 1
+        mapView.onStop(); // 1
+    }
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, lng)));
+    @Override // 1
+    public void onPause() { // 1
+        mapView.onPause(); // 1
+        super.onPause(); // 1
+    }
 
-        MarkerOptions marker = new MarkerOptions();
-        marker.position(new LatLng(lat + 0.002, lng - 0.003));
-        googleMap.addMarker(marker);
+    @Override // 1
+    public void onDestroy() { // 1
+        mapView.onDestroy(); // 1
+        super.onDestroy(); // 1
+    }
+
+    @Override // 1
+    public void onLowMemory() { // 1
+        super.onLowMemory(); // 1
+        mapView.onLowMemory(); // 1
+    }
+
+    @Override // 1
+    public void onCreate(@Nullable Bundle savedInstanceState) { // 1
+        super.onCreate(savedInstanceState); // 1
+
+        if (ActivityCompat.checkSelfPermission(this.getContext(), // 3
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && // 5
+                ActivityCompat.checkSelfPermission(this.getContext(), // 2
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) { // 4
+            ActivityCompat.requestPermissions(this.getActivity(), // 2
+                    new String[] {Manifest.permission.ACCESS_COARSE_LOCATION}, 1); // 3
+            ActivityCompat.requestPermissions(this.getActivity(), // 2
+                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1); // 3
+        }
+
+        FusedLocationProviderClient location = LocationServices. // 1
+                getFusedLocationProviderClient(this.getContext()); // 2
+        location.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null) // 2
+                .addOnCompleteListener(this); // 1
+    }
+
+    @Override // 1
+    public void onDestroyView() { // 1
+        super.onDestroyView(); // 1
+        binding = null; // 1
+    }
+
+    @SuppressLint("MissingPermission") // 1
+    @Override // 1
+    public void onMapReady(@NonNull GoogleMap googleMap) { // 1
+        this.googleMap = googleMap; // 2
+        googleMap.setMyLocationEnabled(true); // 1
+        googleMap.setMinZoomPreference(16); // 1
+    }
+
+    @Override // 1
+    public void onComplete(@NonNull Task task) { // 1
+        Location loc = (Location) task.getResult(); // 3
+        double lng = loc.getLongitude(); // 2
+        double lat = loc.getLatitude(); // 2
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(lat, lng))); // 3
+
+        MarkerOptions marker = new MarkerOptions(); // 2
+        marker.position(new LatLng(lat + 0.002, lng - 0.003)); // 4
+        googleMap.addMarker(marker); // 1
     }
 }
+
+// 112

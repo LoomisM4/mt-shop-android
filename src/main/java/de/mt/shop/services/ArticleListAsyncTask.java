@@ -11,31 +11,33 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import de.mt.shop.objects.Article;
+import de.mt.shop.objects.gen.Article;
 import de.mt.shop.objects.ImageArticle;
-import de.mt.shop.objects.Link;
+import de.mt.shop.objects.gen.Link;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
-public class ArticleListAsyncTask extends AsyncTask<String, Integer, List<ImageArticle>> {
-    private Consumer<List<ImageArticle>> onArticlesLoaded;
+@RequiresApi(api = Build.VERSION_CODES.N) // 4
+public class ArticleListAsyncTask extends AsyncTask<String, Integer, List<ImageArticle>> { // 1
+    private Consumer<List<ImageArticle>> onArticlesLoaded; // 0
 
-    public ArticleListAsyncTask(Consumer<List<ImageArticle>> onArticlesLoaded) {
-        this.onArticlesLoaded = onArticlesLoaded;
+    public ArticleListAsyncTask(Consumer<List<ImageArticle>> onArticlesLoaded) { // 1
+        this.onArticlesLoaded = onArticlesLoaded; // 2
     }
 
-    @Override
-    protected List<ImageArticle> doInBackground(String... strings) {
-        Link link = new Link();
-        link.setHref(strings[0]);
-        List<Article> a = Api.articles(link);
-        return a.stream().map(article -> {
-            Bitmap image = Api.image(article.getLinks().getPreview());
-            return new ImageArticle(article, image);
-        }).collect(Collectors.toList());
+    @Override // 1
+    protected List<ImageArticle> doInBackground(String... strings) { // 1
+        Link link = new Link(); // 2
+        link.setHref(strings[0]); // 2
+        List<Article> a = Api.articles(link); // 2
+        return a.stream().map(article -> { // 3
+            Bitmap image = Api.image(article.getLinks().getPreview()); // 4
+            return new ImageArticle(article, image); // 2
+        }).collect(Collectors.toList()); // 2
     }
 
-    @Override
-    protected void onPostExecute(List<ImageArticle> articles) {
-        Optional.ofNullable(onArticlesLoaded).ifPresent(c -> c.accept(articles));
+    @Override // 1
+    protected void onPostExecute(List<ImageArticle> articles) { // 1
+        Optional.ofNullable(onArticlesLoaded).ifPresent(c -> c.accept(articles)); // 3
     }
 }
+
+// 32
